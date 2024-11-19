@@ -1,0 +1,120 @@
+$primary-color: #007bff;
+$secondary-color: #ecf0f1;
+$accent-color: #2ecc71;
+$border-color: #ddd;
+$table-padding: 1rem;
+$header-font-size: 1.2rem;
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background-color: white;
+
+    th,
+    td {
+        padding: $table-padding;
+        text-align: left;
+        border: 1px solid $border-color;
+        font-size: 1rem;
+        max-width: 250px;
+    }
+
+    // Header row
+    th {
+        background-color: $primary-color;
+        color: white;
+        font-size: $header-font-size;
+        font-weight: bold;
+    }
+
+    // Hover effect for rows
+    tr:hover {
+        background-color: $secondary-color;
+    }
+
+    // Stripe rows with alternating background colors
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .buttonCell {
+        display: inline-flex;
+    }
+
+    // Responsive design for smaller screens
+    @media (max-width: 768px) {
+
+        th,
+        td {
+            padding: 0.8rem;
+          
+        }
+
+        th {
+            font-size: 1rem;
+        }
+    }
+}
+
+
+
+/* Action buttons */
+button {
+    padding: 6px 12px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button.delete {
+    background-color: #dc3545;
+}
+
+button.delete:hover {
+    background-color: #c82333;
+}
+
+button.edit {
+    background-color: #28a745;
+}
+
+button.edit:hover {
+    background-color: #218838;
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    th,
+    td {
+        padding: 8px 12px;
+    }
+}
+.shorten {
+    max-width: 350px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}

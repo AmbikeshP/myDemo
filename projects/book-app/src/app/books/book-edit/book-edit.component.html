@@ -1,0 +1,56 @@
+<h2 class="alignCenter">Edit Book</h2>
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row">
+    <div class="col-md">
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" formControlName="title">
+          <div class="errorText" *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.hasError('required')">
+            Title is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input id="author" formControlName="author">
+          <div class="errorText"
+            *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.hasError('required')">
+            Author is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="year">Year</label>
+          <input id="year" formControlName="year" type="number">
+          <div class="errorText" *ngIf="bookForm.get('year')?.touched && bookForm.get('year')?.hasError('required')">
+            Year is required and must be a valid 4-digit number.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <input id="genre" formControlName="genre" type="text">
+          <div class="errorText" *ngIf="bookForm.get('genre')?.touched && bookForm.get('genre')?.hasError('required')">
+            <small>Genre is required.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea rows="5" cols="40" id="description" formControlName="description" type="text"></textarea>
+          <div class="errorText" *ngIf="bookForm.get('description')?.invalid && bookForm.get('description')?.touched">
+            <small *ngIf="bookForm.get('description')?.hasError('required')">
+              Description is required.
+            </small>
+
+            <small *ngIf="bookForm.get('description')?.hasError('maxlength')">
+              Description should not be greater than 100 alphabets.
+            </small>
+          </div>
+        </div>
+
+        <button class="btn btn-submit btn-primary" type="submit" [disabled]="bookForm.invalid">Save</button>
+
+      </form>
+    </div>
+  </div>
+</div>
