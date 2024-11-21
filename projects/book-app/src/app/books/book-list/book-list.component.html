@@ -1,15 +1,16 @@
 <div class="container">
-  <h2 class="text-center">Book List</h2>
+ 
 
   <div class="row">
     <div [ngClass]="[updatedBook ? 'col-md-8':'col-md-12']">
+      <h2 class="text-center">Book List</h2>
       <ag-grid-angular class="ag-theme-alpine" [columnDefs]="columnDefs"
         [context]="{ componentParent: this }" [rowData]="rowData" [rowSelection]="rowSelection"
         [pagination]="pagination" [paginationPageSize]="paginationPageSize"
         [paginationPageSizeSelector]="paginationPageSizeSelector"  [domLayout]="'autoHeight'" [class]="themeClass">
       </ag-grid-angular>
     </div>
-    <div class="col-md-4" *ngIf="updatedBook">
+    <div class="col-md-4 mt-5" *ngIf="updatedBook">
 
       <div class="card">
         <div class="card-header text-center">
