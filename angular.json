@@ -29,7 +29,7 @@
 							"projects/book-app/src/favicon.ico",
 							"projects/book-app/src/assets"
 						],
-						"styles": [
+						"styles": [						
 							"projects/book-app/src/styles.scss"
 						],
 						"scripts": [],

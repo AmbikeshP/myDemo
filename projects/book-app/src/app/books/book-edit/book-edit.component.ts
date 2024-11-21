@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BooksService } from '../../services/book.service';
@@ -12,12 +12,14 @@ import { BookType } from '../../services/book.model';
 export class BookEditComponent implements OnInit {
   bookForm: FormGroup;
   bookId: number | null = null;
+  @Input() selectedBook: BookType | null = null; // Input for editing an existing book
 
   constructor(
     private fb: FormBuilder,
     private bookService: BooksService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
@@ -29,28 +31,39 @@ export class BookEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.bookId = +this.route.snapshot.paramMap.get('id')!;
     if (this.bookId) {
-      const book = this.bookService.getBooks().subscribe(books => {
+      this.bookService.getBooks().subscribe(books => {
         const selectedBook = books.find(b => b.id === this.bookId);
         if (selectedBook) {
           this.bookForm.patchValue({
-            title: selectedBook.title,
-            author: selectedBook.author,
-            year: selectedBook.year,
-            genre: selectedBook.genre,
-            description: selectedBook.description
+            title: selectedBook?.title,
+            author: selectedBook?.author,
+            year: selectedBook?.year,
+            genre: selectedBook?.genre,
+            description: selectedBook?.description
           });
         }
       });
     }
   }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   this.bookForm.patchValue({
+  //     title: this.selectedBook?.title,
+  //     author: this.selectedBook?.author,
+  //     year: this.selectedBook?.year,
+  //     genre: this.selectedBook?.genre,
+  //     description: this.selectedBook?.description
+  //   });
+  //   this.bookForm.updateValueAndValidity();
+  // }
   get bookFormControl() {
     return this.bookForm.controls;
   }
   onSubmit(): void {
     if (this.bookForm.invalid) return;
-    
+
     const updatedBook: BookType = {
       id: this.bookId!,
       ...this.bookForm.value
@@ -58,5 +71,6 @@ export class BookEditComponent implements OnInit {
 
     this.bookService.updateBook(updatedBook);
     this.router.navigate(['/books']);
+    //this.bookForm.reset();
   }
 }

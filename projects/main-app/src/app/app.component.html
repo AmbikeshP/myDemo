@@ -1,1 +1,22 @@
-<router-outlet/>
+<app-header>
+    <header>
+        <div class="logo">
+            My Angular Demo
+        </div>
+
+        <ul class="nav-links">
+            <li><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a></li>
+            <li><a [routerLink]="['/books']" routerLinkActive="router-link-active">Books</a>
+            </li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+    </header>
+
+</app-header>
+<router-outlet />

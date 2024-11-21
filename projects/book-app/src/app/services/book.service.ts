@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { BookType } from './book.model';
 
 export interface Book {
@@ -13,11 +13,7 @@ export interface Book {
   providedIn: 'root'
 })
 export class BooksService {
-  // private books: Book[] = [
-  //   { id: 1, title: '1984', author: 'George Orwell', year: 1949 },
-  //   { id: 2, title: 'Brave New World', author: 'Aldous Huxley', year: 1932 },
-  //   { id: 3, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960 },
-  // ];
+
   private books: BookType[] = [
     {
       id: 1,
@@ -27,14 +23,7 @@ export class BooksService {
       year: 1960,
       description: "A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a South poisoned by virulent prejudice."
     },
-    {
-      id: 2,
-      title: "1984",
-      author: "George Orwell",
-      genre: "Dystopian, Political Fiction",
-      year: 1949,
-      description: "A dystopian novel set in a totalitarian society under the control of the Party and its leader, Big Brother, where surveillance and control are the norm."
-    },
+   
     {
       id: 3,
       title: "Pride and Prejudice",
@@ -101,12 +90,26 @@ export class BooksService {
     }
   ]
 
-  private booksSubject = new BehaviorSubject<BookType[]>(this.books);
+
+  booksSubject = new BehaviorSubject<BookType[]>(this.books);
+  booksList = this.booksSubject.asObservable();
+  selectedBook = new Subject<BookType>();
+  // updatedBook = this.selectedBook.asObservable();
+  private updatedBook!: BookType;
+
+
 
   constructor() { }
 
+  setData(data: BookType) {
+    this.updatedBook = data;
+  }
+
+  getData(): BookType {
+    return this.updatedBook;
+  }
   getBooks() {
-    return this.booksSubject.asObservable();
+    return this.booksList;
   }
 
   addBook(book: BookType) {
@@ -118,10 +121,16 @@ export class BooksService {
     const index = this.books.findIndex(book => book.id === updatedBook.id);
     if (index !== -1) {
       this.books[index] = updatedBook;
+      this.setData(updatedBook);
       this.booksSubject.next(this.books);
     }
   }
+  getBookById(bookId: number): Observable<BookType> {
+    const selectedOne: BookType = this.books.filter(book => book.id == bookId)[0];
+    this.selectedBook.next(selectedOne);
+    return this.selectedBook.asObservable();
 
+  }
   deleteBook(bookId: number) {
     this.books = this.books.filter(book => book.id !== bookId);
     this.booksSubject.next(this.books);

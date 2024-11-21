@@ -1,28 +1,44 @@
-<h2 class="alignCenter">Book List</h2>
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Year</th>
-      <th>Genre</th>
-      <th class="shorten">Description</th>
-      <th colspan="2">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.title }}</td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.year | formatYear }}</td>
-      <td>{{ book.genre }}</td>
-      <td class="shorten">{{ book.description }}</td>
-      <td colspan="2">
-        <div class="buttonCell">
-        <button class="" (click)="onEdit(book)">Edit</button>
-        <button class="" (click)="onDelete(book.id)">Delete</button>
+<div class="container">
+  <h2 class="text-center">Book List</h2>
+
+  <div class="row">
+    <div [ngClass]="[updatedBook ? 'col-md-8':'col-md-12']">
+      <ag-grid-angular class="ag-theme-alpine" [columnDefs]="columnDefs"
+        [context]="{ componentParent: this }" [rowData]="rowData" [rowSelection]="rowSelection"
+        [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+        [paginationPageSizeSelector]="paginationPageSizeSelector"  [domLayout]="'autoHeight'" [class]="themeClass">
+      </ag-grid-angular>
+    </div>
+    <div class="col-md-4" *ngIf="updatedBook">
+
+      <div class="card">
+        <div class="card-header text-center">
+          <h4>Updated Book Details</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 font-weight-bold">Title:</div>
+            <div class="col-md-8">{{updatedBook.title}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 font-weight-bold">Author:</div>
+            <div class="col-md-8">{{updatedBook.author}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 font-weight-bold">Year:</div>
+            <div class="col-md-8">{{updatedBook.year}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 font-weight-bold">Genre:</div>
+            <div class="col-md-8">{{updatedBook.genre}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 font-weight-bold">Description:</div>
+            <div class="col-md-8">{{updatedBook.description}}</div>
+          </div>
+        </div>
       </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+    </div>
+  </div>
+</div>

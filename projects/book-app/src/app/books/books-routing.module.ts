@@ -6,7 +6,7 @@ import { BookEditComponent } from './book-edit/book-edit.component';
 const routes: Routes = [
   { path: '', component: BookListComponent },
   { path: 'edit/:id', component: BookEditComponent },
-];;
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

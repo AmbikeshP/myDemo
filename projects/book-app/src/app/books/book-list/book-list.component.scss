@@ -1,3 +1,4 @@
+
 $primary-color: #007bff;
 $secondary-color: #ecf0f1;
 $accent-color: #2ecc71;
@@ -16,8 +17,9 @@ $header-font-size: 1.2rem;
         padding: $table-padding;
         text-align: left;
         border: 1px solid $border-color;
-        font-size: 1rem;
+        font-size: 12px;
         max-width: 250px;
+        background-color: unset;
     }
 
     // Header row
@@ -48,7 +50,7 @@ $header-font-size: 1.2rem;
         th,
         td {
             padding: 0.8rem;
-          
+
         }
 
         th {
@@ -57,19 +59,23 @@ $header-font-size: 1.2rem;
     }
 }
 
-
+.bgNone {
+    background-color: transparent !important;
+}
 
 /* Action buttons */
 button {
     padding: 6px 12px;
-    margin: 0 5px;
-    background-color: #007bff;
+    margin: 0 6px 6px 0;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
+}
+.grid {
+    overflow-x: hidden;
 }
 
 
@@ -111,10 +117,79 @@ button.edit:hover {
         padding: 8px 12px;
     }
 }
+
 .shorten {
     max-width: 350px;
     white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.errorText {
+    color: red;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for each form group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label styles */
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input and textarea styles */
+.form-control {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* Button styles */
+.btn-submit {
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 100px;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
 }
