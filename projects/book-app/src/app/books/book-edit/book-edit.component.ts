@@ -12,7 +12,6 @@ import { BookType } from '../../services/book.model';
 export class BookEditComponent implements OnInit {
   bookForm: FormGroup;
   bookId: number | null = null;
-  @Input() selectedBook: BookType | null = null; // Input for editing an existing book
 
   constructor(
     private fb: FormBuilder,
@@ -48,16 +47,7 @@ export class BookEditComponent implements OnInit {
       });
     }
   }
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   this.bookForm.patchValue({
-  //     title: this.selectedBook?.title,
-  //     author: this.selectedBook?.author,
-  //     year: this.selectedBook?.year,
-  //     genre: this.selectedBook?.genre,
-  //     description: this.selectedBook?.description
-  //   });
-  //   this.bookForm.updateValueAndValidity();
-  // }
+ 
   get bookFormControl() {
     return this.bookForm.controls;
   }
@@ -71,6 +61,5 @@ export class BookEditComponent implements OnInit {
 
     this.bookService.updateBook(updatedBook);
     this.router.navigate(['/books']);
-    //this.bookForm.reset();
   }
 }

@@ -6,7 +6,6 @@ import { BookListComponent } from './book-list/book-list.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { FormatYearPipe } from '../pipes/format-year.pipe';
-import { HighlightColorDirective } from '../directives/highlight-color.directive';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { ButtonRendererComponent } from './book-list/button-rendere.component';
 
@@ -16,7 +15,6 @@ import { ButtonRendererComponent } from './book-list/button-rendere.component';
     BookListComponent,
     BookEditComponent,
     FormatYearPipe,
-    HighlightColorDirective,
     ButtonRendererComponent
   ],
   imports: [
